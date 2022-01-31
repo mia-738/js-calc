@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="2.css">
+        <script src="2.js"></script>
+    </head>
+    <body>
+        <form name="dentaku">
+            <table>
+                <tr>
+                    <td colspan="4">
+                        <input type="text" class="display" name="display" value="0" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td><input type="button" class="option" value="Rad"></td>
+                    <td><input type="button" class="option" value="Deg"></td>
+                    <td><input type="button" value="x!" name="fact" onclick="get_calc(this)"></td>
+                    <td><input type="button" value="(" onclick="get_calc(this)"></td>
+                    <td><input type="button" value=")" onclick="get_calc(this)"></td>
+                    <td><input type="button" value="%" name="par" onclick="get_calc(this)"></td>
+                    <td><input type="button" value="CE" onclick="get_calc(this)"></td>
+                </tr>
+                <tr>
+                    <td><input type="button" value="Inv" name="inv"></td>
+                    <td><input type="button" value="sin" name="sin" onclick="get_calc(this)"></td>
+                    <td><input type="button" value="In" name="in" onclick="get_calc(this)"></td>
+                    <td><input type="button" value="7" onclick="get_calc(this)"></td>
+                    <td><input type="button" value="8" onclick="get_calc(this)"></td>
+                    <td><input type="button" value="9" onclick="get_calc(this)"></td>
+                    <td><input type="button" value="÷" class="operator" name="div" onclick="get_calc(this)"></td>
+                </tr>
+                <tr>
+                    <td><input type="button" value="π" name="pi" onclick="get_calc(this)"></td>
+                    <td><input type="button" value="cos" name="cos" onclick="get_calc(this)"></td>
+                    <td><input type="button" value="log" name="log" onclick="get_calc(this)"></td>
+                    <td><input type="button" value="4" onclick="get_calc(this)"></td>
+                    <td><input type="button" value="5" onclick="get_calc(this)"></td>
+                    <td><input type="button" value="6" onclick="get_calc(this)"></td>
+                    <td><input type="button" value="×" class="operator" name="multi" onclick="get_calc(this)"></td>
+                </tr>
+                <tr>
+                    <td><input type="button" value="e" name="e" onclick="get_calc(this)"></td>
+                    <td><input type="button" value="tan" name="tan" onclick="get_calc(this)"></td>
+                    <td><input type="button" value="√" name="rute" onclick="get_calc(this)"></td>
+                    <td><input type="button" value="1" onclick="get_calc(this)"></td>
+                    <td><input type="button" value="2" onclick="get_calc(this)"></td>
+                    <td><input type="button" value="3" onclick="get_calc(this)"></td>
+                    <td><input type="button" value="-" class="operator" onclick="get_calc(this)"></td>
+                </tr>
+                <tr>
+                    <td><input type="button" value="Ans" name="ans"></td>
+                    <td><input type="button" value="EXP" name="exp" onclick="get_calc(this)"></td>
+                    <td><input type="button" value="x^y" name="squ" onclick="get_calc(this)"></td>
+                    <td><input type="button" value="0" onclick="get_calc(this)"></td>
+                    <td><input type="button" value="." onclick="get_calc(this)"></td>
+                    <td><input type="button" value="=" class="equal" onclick="get_calc(this)"></td>
+                    <td><input type="button" value="+" class="operator" onclick="get_calc(this)"></td>
+                </tr>
+            </table>
+            <input type="text" class="pl" name="pl" value="" disabled>
+            <input type="text" class="calc" name="calc" value="" disabled>
+        </form>
+    </body>
+</html>
