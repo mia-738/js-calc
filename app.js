@@ -8,7 +8,6 @@ let ans = [];
 
 function get_calc(btn) {
     let dis = [];
-    console.log(calc);
 
 
     if(btn.value) {
