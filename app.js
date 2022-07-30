@@ -1,14 +1,18 @@
 let sp = 0;
 let num = 0;
 let time = 2;
+let aaaa = 0;
 let func = [];
 let calc = [];
 let formula = [];
 let ans = [];
+let kari = [];
 
 function get_calc(btn) {
     let dis = [];
 
+    console.log(calc)
+    console.log(kari)
 
     if(btn.value) {
         dis += btn.value;
@@ -23,17 +27,31 @@ function get_calc(btn) {
 
 
     if(btn.value == "=") {
-        formula += document.dentaku.display.value;        
-        calc = eval(calc);
-        document.dentaku.display.value = eval(calc);
+        if (aaaa >= 1){
+            calc += kari;
+            aaaa = 0;
+            calc += ")";
+            document.dentaku.display.value += ")";
+        }
+
+        console.log(calc)
+        console.log(kari)
+
+        formula += document.dentaku.display.value;
+        function Calc(obj){
+            return Function('"use strict";return (' + obj + ')')();
+        }
+        calc = Number(Calc(calc).toFixed(10));
+        document.dentaku.display.value = Number(Calc(calc).toFixed(10));
         time = 0;
-        ans += eval(calc);
+        ans += Number(Calc(calc).toFixed(10));
         document.dentaku.pl.value = formula;
         document.dentaku.calc.value = ans;
     } 
     else if (btn.value == "CE") {
         document.dentaku.display.value = "0";
         calc = [];
+        kari = [];
         dis = [];
         time = 1;
         num = 0;
@@ -65,6 +83,7 @@ function get_calc(btn) {
                 document.dentaku.display.value += btn.value;
             }
             else if (btn.value == "x!") {
+                aaaa = 1;
                 btn.value = "factorialize(";
                 calc += btn.value;
                 document.dentaku.fact.value = "!";
@@ -84,7 +103,7 @@ function get_calc(btn) {
                 calc += btn.value;
                 document.dentaku.squ.value = "^";
                 document.dentaku.display.value += btn.value;
-                document.dentaku.squ.value = "×^y";
+                document.dentaku.squ.value = "x^y";
             }
             else if (btn.value == "+") {
                 calc += btn.value;
@@ -95,6 +114,10 @@ function get_calc(btn) {
                 document.dentaku.display.value += btn.value;
             }
             else if (btn.value == ")") { 
+                if (aaaa <= 1) {
+                    kari += calc;
+                }
+                aaaa = 0;
                 calc += btn.value;
                 document.dentaku.display.value += btn.value;
             }
@@ -110,16 +133,31 @@ function get_calc(btn) {
             }
             else if (!isNaN(dis)) {
                 num++
-                if (calc == "") {
-                    document.dentaku.display.value = "";
-                }
-                if (sp >= 1) {
-                    calc += "*" + btn.value;
-                    document.dentaku.display.value += "×" + btn.value;
+                if (aaaa === 0) {
+                    if (calc == "") {
+                        document.dentaku.display.value = "";
+                    }
+                    if (sp >= 1) {
+                        calc += "*" + btn.value;
+                        document.dentaku.display.value += "×" + btn.value;
+                    }
+                    else {
+                        calc += btn.value;
+                        document.dentaku.display.value += btn.value;
+                    }
                 }
                 else {
-                    calc += btn.value;
-                    document.dentaku.display.value += btn.value;
+                    if (calc == "") {
+                        document.dentaku.display.value = "";
+                    }
+                    if (sp >= 1) {
+                        kari += "*" + btn.value;
+                        document.dentaku.display.value += "×" + btn.value;
+                    }
+                    else {
+                        kari += btn.value;
+                        document.dentaku.display.value += btn.value;
+                    }
                 }
             }
         }
@@ -136,21 +174,61 @@ function get_calc(btn) {
             if (calc == "") {
                 document.dentaku.display.value = "";
             }
-            btn.value = "Math.sin(";
-            calc += btn.value;
-            document.dentaku.sin.value = "sin(";
-            document.dentaku.display.value += btn.value;
-            document.dentaku.sin.value = "sin";
+            if (sp >= 1){
+                btn.value = "*Math.sin(";
+                calc += btn.value;
+                document.dentaku.sin.value = "×sin(";
+                document.dentaku.display.value += btn.value;
+                document.dentaku.sin.value = "sin";
+                sp++
+            }
+            else if (num >= 1){
+                btn.value = "*Math.sin(";
+                calc += btn.value;
+                document.dentaku.sin.value = "sin(";
+                document.dentaku.display.value += btn.value;
+                document.dentaku.sin.value = "sin";
+                sp++
+            }
+            else {
+                btn.value = "Math.sin(";
+                calc += btn.value;
+                document.dentaku.sin.value = "sin(";
+                document.dentaku.display.value += btn.value;
+                document.dentaku.sin.value = "sin";
+                sp++
+            }
+            aaaa = 1;
         }
         else if (btn.value == "In") {
             if (calc == "") {
                 document.dentaku.display.value = "";
             }
-            btn.value = "Math.log(";
-            calc += btn.value;
-            document.dentaku.in.value = "In(";
-            document.dentaku.display.value += btn.value;
-            document.dentaku.in.value = "In";
+            if (sp >= 1){
+                btn.value = "*Math.log(";
+                calc += btn.value;
+                document.dentaku.in.value = "×In(";
+                document.dentaku.display.value += btn.value;
+                document.dentaku.in.value = "In";
+                sp++
+            }
+            else if (num >= 1){
+                btn.value = "*Math.log(";
+                calc += btn.value;
+                document.dentaku.in.value = "In(";
+                document.dentaku.display.value += btn.value;
+                document.dentaku.in.value = "In";
+                sp++
+            }
+            else {
+                btn.value = "Math.log(";
+                calc += btn.value;
+                document.dentaku.in.value = "In(";
+                document.dentaku.display.value += btn.value;
+                document.dentaku.in.value = "In";
+                sp++
+            }
+            aaaa = 1;
         }
         else if (btn.value == "π") {
             if (calc == "") {
@@ -183,21 +261,61 @@ function get_calc(btn) {
             if (calc == "") {
                 document.dentaku.display.value = "";
             }
-            btn.value = "Math.cos(";
-            calc += btn.value;
-            document.dentaku.cos.value = "cos(";
-            document.dentaku.display.value += btn.value;
-            document.dentaku.cos.value = "cos";
+            if (sp >= 1){
+                btn.value = "*Math.cos(";
+                calc += btn.value;
+                document.dentaku.cos.value = "×cos(";
+                document.dentaku.display.value += btn.value;
+                document.dentaku.cos.value = "cos";
+                sp++
+            }
+            else if (num >= 1){
+                btn.value = "*Math.cos(";
+                calc += btn.value;
+                document.dentaku.cos.value = "cos(";
+                document.dentaku.display.value += btn.value;
+                document.dentaku.cos.value = "cos";
+                sp++
+            }
+            else {
+                btn.value = "Math.cos(";
+                calc += btn.value;
+                document.dentaku.cos.value = "cos(";
+                document.dentaku.display.value += btn.value;
+                document.dentaku.cos.value = "cos";
+                sp++
+            }
+            aaaa = 1;
         }
         else if (btn.value == "log") {
             if (calc == "") {
                 document.dentaku.display.value = "";
             }
-            btn.value = "Math.log10(";
-            calc += btn.value;
-            document.dentaku.log.value = "log(";
-            document.dentaku.display.value += btn.value;
-            document.dentaku.log.value = "log";
+            if (sp >= 1){
+                btn.value = "*Math.log10(";
+                calc += btn.value;
+                document.dentaku.log.value = "×log(";
+                document.dentaku.display.value += btn.value;
+                document.dentaku.log.value = "log";
+                sp++
+            }
+            else if (num >= 1){
+                btn.value = "*Math.log10(";
+                calc += btn.value;
+                document.dentaku.log.value = "log(";
+                document.dentaku.display.value += btn.value;
+                document.dentaku.log.value = "log";
+                sp++
+            }
+            else {
+                btn.value = "Math.log10(";
+                calc += btn.value;
+                document.dentaku.log.value = "log(";
+                document.dentaku.display.value += btn.value;
+                document.dentaku.log.value = "log";
+                sp++
+            }
+            aaaa = 1;
         }
         else if (btn.value == "e") {
             if (calc == "") {
@@ -230,11 +348,31 @@ function get_calc(btn) {
             if (calc == "") {
                 document.dentaku.display.value = "";
             }
-            btn.value = "Math.tan(";
-            calc += btn.value;
-            document.dentaku.tan.value = "tan(";
-            document.dentaku.display.value += btn.value;
-            document.dentaku.tan.value = "tan";
+            if (sp >= 1){
+                btn.value = "*Math.tan(";
+                calc += btn.value;
+                document.dentaku.tan.value = "×tan(";
+                document.dentaku.display.value += btn.value;
+                document.dentaku.tan.value = "tan";
+                sp++
+            }
+            else if (num >= 1){
+                btn.value = "*Math.tan(";
+                calc += btn.value;
+                document.dentaku.tan.value = "tan(";
+                document.dentaku.display.value += btn.value;
+                document.dentaku.tan.value = "tan";
+                sp++
+            }
+            else {
+                btn.value = "Math.tan(";
+                calc += btn.value;
+                document.dentaku.tan.value = "tan(";
+                document.dentaku.display.value += btn.value;
+                document.dentaku.tan.value = "tan";
+                sp++
+            }
+            aaaa = 1;
         }
         else if (btn.value == "√") { 
             if (calc == "") {
@@ -265,6 +403,5 @@ function get_calc(btn) {
     else {
         num = 0;
     }
+
 }
-
-
